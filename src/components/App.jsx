@@ -38,7 +38,7 @@ export class App extends Component {
             totalPages,
           });
         })
-        .catch(error => alert(error))
+        .catch(error => console.log(error))
         .finally(() => {
           this.setState({
             status: 'idle',
