@@ -29,6 +29,9 @@ export class App extends Component {
 
       Api(searchQuery, page, PER_PAGE)
         .then(res => {
+          if (res.total === 0) {
+            return alert(`No such pictures`)
+          }
           const { hits, totalHits } = res;
           const totalPages = Math.ceil(totalHits / PER_PAGE);
 
@@ -38,7 +41,7 @@ export class App extends Component {
             totalPages,
           });
         })
-        .catch(error => console.log(error))
+        .catch(error => alert(error))
         .finally(() => {
           this.setState({
             status: 'idle',
@@ -49,7 +52,7 @@ export class App extends Component {
 
   onSearchbarSubmit = searchQuery => {
     this.setState({
-      searchQuery: { searchQuery },
+      searchQuery,
       searchResult: [],
       totalHits: null,
       page: 1,

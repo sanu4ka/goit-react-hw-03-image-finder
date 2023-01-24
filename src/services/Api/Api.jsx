@@ -3,11 +3,18 @@ export default function api(searchQuery, page, PER_PAGE) {
 
   return fetch(
     `https://pixabay.com/api/?q=${searchQuery}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=${PER_PAGE}`
-  ).then(res => {
-    if (res.totalHits > 0) {
+  )
+    .then(res => {
       return res.json();
-    }
-
-    return Promise.reject(alert('No hits'));
-  });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  
 }
+
+// .then(res => {
+//     if (res.totalHits > 0) {
+//       return res.json();
+//     }
+//     })
